@@ -5,7 +5,7 @@ import Discord from "@/public/Discord";
 
 export default function Footer() {
   const githubLink =
-    "https://github.com/celo-org/celo-progressive-dapp-starter";
+    "https://github.com/celo-org/react-celo";
   const discordLink = "https://discord.gg/cGCE9p9352";
 
   return (

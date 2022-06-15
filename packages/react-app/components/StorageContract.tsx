@@ -15,7 +15,8 @@ import {
 } from "@mui/material";
 
 import { useInput } from "@/hooks/useInput";
-import { useContractKit } from "@celo-tools/use-contractkit";
+// import { useContractKit } from "@celo-tools/use-contractkit";
+import { useCelo } from '@celo/react-celo';
 import { useEffect, useState } from "react";
 import { SnackbarAction, useSnackbar } from "notistack";
 import { truncateAddress, truncateTxHash } from "@/utils";
@@ -81,7 +82,7 @@ function StorageEventTable({ network, rows }) {
 
 
 export function StorageContract({ contractData }) {
-  const { kit, address, network, performActions } = useContractKit();
+  const { kit, address, network, performActions } = useCelo();
   const [storageValue, setStorageValue] = useState<string | null>(null);
   const [storageInput, setStorageInput] = useInput({ type: "text" });
   const [contractLink, setContractLink] = useState<string | null>(null);
@@ -94,7 +95,7 @@ export function StorageContract({ contractData }) {
   console.log('The Graph query results', queryData);
 
   const contract = contractData
-    ? (new kit.web3.eth.Contract(
+    ? (new kit.connection.web3.eth.Contract(
       contractData.abi,
       contractData.address
     ) as any as Storage)
