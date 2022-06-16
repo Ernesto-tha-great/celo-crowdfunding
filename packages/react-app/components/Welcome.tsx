@@ -68,7 +68,7 @@ const Welcome = ({contractData }) => {
         const {title, desc, img, duration, goal } = formData;
         const parsedAmount = ethers.utils.parseEther(goal).toString();
         await contract.methods.startProject(stableTokenAddress, title, desc, img, duration, parsedAmount).send({from: address, gasPrice: gasPriceMinimumContract})
-        const result = contract.methods.returnProjects();
+        const result = contract.methods.returnProjects().call();
         // setResults(result)
         console.log("List of addressses for each of the projects created:", result);
 
