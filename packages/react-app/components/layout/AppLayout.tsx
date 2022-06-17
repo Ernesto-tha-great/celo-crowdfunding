@@ -11,13 +11,10 @@ interface Props {
 
 export default function AppLayout({ title, description, children }: Props) {
   return (
-    <div className="min-h-screen">
-      <div className="gradient-bg-welcome">
+    <div className="min-h-screen gradient-bg-welcome">
       <Header />
       <Meta title={title} description={description} />
       {children}
-      <Footer />
-      </div>
     </div>
   );
 }

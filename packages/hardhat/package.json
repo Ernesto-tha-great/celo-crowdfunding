@@ -36,8 +36,9 @@
     "typechain": "^7.0.0"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/contracts": "^4.4.2",
     "ganache": "^7.0.0",
+    "openzeppelin-solidity": "^4.4.2",
     "redstone-evm-connector": "^2.1.9"
   }
 }

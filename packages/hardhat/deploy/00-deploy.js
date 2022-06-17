@@ -8,13 +8,21 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   //   log: true,
   // });
 
-  
-  await deploy("Storage", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+  await deploy("CrowdFund", {
     from: deployer,
     //args: [ "Hello", ethers.utils.parseEther("1.5") ],
     log: true,
   });
+
+
+
+  
+  // await deploy("Storage", {
+  //   // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+  //   from: deployer,
+  //   //args: [ "Hello", ethers.utils.parseEther("1.5") ],
+  //   log: true,
+  // });
 
   // Getting a previously deployed contract
   // const Greeter = new ethers.Contract("Greeter", deployer);
@@ -48,4 +56,4 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
 };
 
-module.exports.tags = ["CrowdFund", "Storage", "Project"];
+module.exports.tags = ["CrowdFund", "Project"];

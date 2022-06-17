@@ -1,43 +1,57 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {SiEthereum} from 'react-icons/si';
 import {BsInfoCircle} from 'react-icons/bs';
-import  Loader  from '@/components/Loader';
-import { useCelo } from '@celo/react-celo';
 import { truncateAddress } from '@/utils';
+import { useCelo } from '@celo/react-celo';
 import { CrowdFund } from "@celo-progressive-dapp-starter/hardhat/types/Crowdfund";
-import { ethers } from 'ethers';
+import {Project} from "@celo-progressive-dapp-starter/hardhat/types/Project"
 import { CeloContract } from '@celo/contractkit/lib/base';
+import deployedContracts from "@celo-progressive-dapp-starter/hardhat/artifacts/contracts/Project.sol/Project.json";
+import  {ProjectCard}  from './ProjectCard';
+import { Input } from './Input';
 
 
-interface InputProps {
-    placeholder: string,
-    name: string,
-    type: string,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void
-}
-const commonStyles = 'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white';
-const Input = ({placeholder, name,  type, handleChange}: InputProps) => (  
-    <input 
-      placeholder={placeholder}
-      type={type}
-      step="0.0001"
-      onChange={(e) => handleChange(e, name)}
-      className='my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism'
-     />
-)
 
 const Welcome = ({contractData }) => {
-    const { address, network, connect, destroy, kit } = useCelo();
+    const { address, connect,  kit } = useCelo();
     const [formData, setFormData] = useState({
          title: '',
          desc: '',
          img: '',
          duration: '',
          goal: ''
-        
         });
-        const [results, setResults] = useState<any>();
-    const [isLoading, setIsLoading] = useState(false);
+    const [results, setResults] = useState<any>([]);
+
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+          const result = await contract.methods.returnProjects().call();
+          const data2 = []
+          for (let i = 0; i < result.length; i++) {
+            const projectContract = contractData
+             ? (new kit.connection.web3.eth.Contract(
+             deployedContracts.abi,
+             result[i]      
+             ) as any as Project)
+                 : null;
+        const data = await projectContract.methods.getDetails().call()
+        const structuredData = {
+        projectCreator: data.projectCreator,
+        projectTitle: data.projectTitle, 
+        projectDescription: data.projectDescription,
+        projectImageLink: data.projectImageLink,
+        fundRaisingDeadline: data.fundRaisingDeadline,
+        projectGoalAmount: data.projectGoalAmount
+        }
+        data2.push(structuredData)
+        }
+        setResults(data2)
+        }
+        fetchProjects()
+    }, [])
+
+
 
     const handleSubmit = (e) => {
         const {title, desc, img, duration, goal } = formData;
@@ -49,6 +63,8 @@ const Welcome = ({contractData }) => {
             createProject();
         }
     }
+
+
     const contract = contractData
     ? (new kit.connection.web3.eth.Contract(
         contractData.abi,
@@ -57,23 +73,23 @@ const Welcome = ({contractData }) => {
     : null;
 
 
+
     const handleChange = (e: { target: { value: any; }; }, name: any) => {
         setFormData(( prevState ) => ({ ...prevState, [name]: e.target.value }));
     }
-    const createProject = async ( ) => {
+
+
+    const createProject = async () => {
         const stableTokenAddress = await kit.registry.addressFor(CeloContract.StableToken)
         const gasPriceMinimumContract = await kit.contracts.connection.gasPrice()
-        console.log( 'gas', gasPriceMinimumContract)
-
         const {title, desc, img, duration, goal } = formData;
-        const parsedAmount = ethers.utils.parseEther(goal).toString();
-        await contract.methods.startProject(stableTokenAddress, title, desc, img, duration, parsedAmount).send({from: address, gasPrice: gasPriceMinimumContract})
-        const result = contract.methods.returnProjects().call();
-        // setResults(result)
-        console.log("List of addressses for each of the projects created:", result);
+        await contract.methods.startProject(stableTokenAddress, title, desc, img, duration, goal).send({from: address, gasPrice: gasPriceMinimumContract}) 
+   }
 
-            }
+
+
   return (
+    <div className='flex flex-1 flex-col'>
     <div className=' flex w-full justify-center items-center'>
     <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
         <div className='flex flex-1 justify-start flex-col mf:mr-10'>
@@ -93,15 +109,7 @@ const Welcome = ({contractData }) => {
                </button>
             )}
             
-            {/* <div className='grid sm:grid-cols-3 grid-cols-2 w-full mt-10'>
-                <div className={`rounded-tl-2xl ${commonStyles}`}>  Reliability</div>
-                <div className={commonStyles}>Security</div>
-                <div className={`rounded-tr-2xl ${commonStyles}`}>{results}</div>
-                <div className={`rounded-bl-2xl ${commonStyles}`}>Web 3.0</div>
-                <div className={commonStyles}>Low Fees</div>
-                <div className={`rounded-br-2xl ${commonStyles}`}>blockchain</div>
-            </div> */}
-             <div className='white-glassmorphism text-white p-5 mt-4 rounded-md'>
+            <div className='white-glassmorphism text-white p-5 mt-4 rounded-md'>
                 <div className='items-center'>
                     <p className='font-bold mb-5'>How it Works</p>
                     <p className='my-3'>1. Creator creates a new project </p>
@@ -112,6 +120,7 @@ const Welcome = ({contractData }) => {
                 </div>
             </div>
         </div>
+        
 
        <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
             <div className='p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72  w-full my-5 eth-card white-glassmorphism'>
@@ -139,18 +148,32 @@ const Welcome = ({contractData }) => {
                 <Input placeholder='goal amount' name='goal'  type='number' handleChange={handleChange} />
 
                 <div className='h-[1px] w-full bg-gray-400 my-2' />
-                {false ? (
-                    <Loader />
-                ) : (
                     <button className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer' type='button' onClick={handleSubmit}>
                       Create
                     </button>
-                )}
+                </div>
             </div>
-       </div>
-    </div>
-   
-</div>
+      </div>
+   </div>
+           
+        <div className='blue-glassmorphism grdient-bg-transactions'> 
+            <div className='flex flex-col md:p-12 py-12 px-4'>   
+               {address ? (
+                  <>
+                  <h3 className='text-white text-3xl text-center my-2'>Latest Campaigns</h3>
+                  <div className='flex flex-wrap justify-center items-center mt-10'>
+                   { results?.map((item, index) => (
+                         <ProjectCard item={item} key={index} />
+                    )).reverse()}
+                     </div>
+                     </>
+                    ) : (
+                    <h3 className='text-white text-3xl text-center my-2'>Connect your account</h3>
+                )}
+                </div> 
+
+            </div> 
+        </div>
   )
 }
 

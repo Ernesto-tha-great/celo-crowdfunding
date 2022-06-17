@@ -20,7 +20,7 @@ const NavbarItem = ({title, classProps}: NavbarProps) => {
 
 
 export function Header() {
-  const { address, network, connect, destroy, kit } = useCelo();
+  const { address, connect, kit } = useCelo();
   const [toggleMenu, setToggleMenu] = React.useState(false)
 
   return (
@@ -29,7 +29,7 @@ export function Header() {
         <Image src={logo} alt='logo' width={62} height={42}/>
     </div>
     <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
-        {['Market', 'Exchange', 'Tutorials', 'Wallets'].map((item, index) => (
+        {['Create', 'Pledge', 'Claim', 'Refund'].map((item, index) => (
             <NavbarItem title={item} key={index} />
         ))}
         {!address ? (

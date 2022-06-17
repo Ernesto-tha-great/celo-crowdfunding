@@ -8,7 +8,6 @@ import Welcome from "@/components/Welcome";
 export default function App() {
   const { network } = useCelo();
 
- 
 
   const contracts =
     deployedContracts[network?.chainId?.toString()]?.[

@@ -167,7 +167,7 @@
       "chainId": "44787",
       "contracts": {
         "Crowdfund": {
-          "address": "0xE7b866cA6F24a566AeA586eA366Ce11886104467",
+          "address": "0x66EBa5eCBD170c71fbf1A27502f39Fc86D83053E",
           "abi": [
             {
               "anonymous": false,
@@ -217,6 +217,25 @@
               ],
               "name": "ProjectStarted",
               "type": "event"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "name": "projects",
+              "outputs": [
+                {
+                  "internalType": "contract Project",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
             },
             {
               "inputs": [],
@@ -383,7 +402,7 @@
           ]
         },
         "CrowdFund": {
-          "address": "0x2aBF3c08597880C817Ff277e1c6899f3fa4997A7",
+          "address": "0x71EDEa9f10CdFba817B72135a45687723778dfc5",
           "abi": [
             {
               "anonymous": false,
@@ -433,6 +452,25 @@
               ],
               "name": "ProjectStarted",
               "type": "event"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "name": "projects",
+              "outputs": [
+                {
+                  "internalType": "contract Project",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
             },
             {
               "inputs": [],
