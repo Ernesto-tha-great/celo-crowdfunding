@@ -1,72 +1,162 @@
-# Celo Progressive Dapp Starter
+<div id="top"></div>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-A starter pack to get started with building dapps on Celo.
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 
-You can view a live version of the template deployed at https://celo-progressive-dapp-starter.netlify.app/.
+<!-- [![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
-This repo is heavily inspired by [scaffold-eth](https://github.com/scaffold-eth/scaffold-eth).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="docs-celo-composer.netlify.app">
+    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
+  </a>
 
-Prerequisites:
+<h2 align="center">Celo Composer</h2>
 
-1. Node (v12), [NVM](https://github.com/nvm-sh/nvm)
-2. Yarn
-3. Git
+  <p align="center">
+    A starter pack to get started with building dapps on Celo.
+    <br />
+    <a href="docs-celo-composer.netlify.app"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="celo-composer.netlify.app">View Demo</a>
+    ·
+    <a href="https://github.com/celo-org/celo-composer/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/celo-org/celo-composer/discussions">Request Feature</a>
+  </p>
+</div>
 
-```shell
-git clone https://github.com/celo-org/celo-progressive-dapp-starter
+<!-- TABLE OF CONTENTS -->
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+Celo Composer allows you to quickly build, deploy, and iterate on decentralized applications using Celo. It provides a number of frameworks, examples, and Celo specific functionality to help you get started with your next dApp.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Built With
+
+Celo Composer is built on Celo to make it simple to build dApps using a variety of front-end frameworks.
+
+- [Celo](https://celo.org/)
+- [Solidity](https://docs.soliditylang.org/en/v0.8.15/)
+- [Next.js](https://nextjs.org/)
+- [React.js](https://reactjs.org/)
+- [Material UI](https://mui.com/)
+- [React Native](https://reactnative.dev/)
+- [Flutter](https://docs.flutter.dev/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+To build your dApp, you'll need to install the dependencies, create a new project, and run the following commands:
+
+## Prerequisites
+
+- Node (v12), [NVM](https://github.com/nvm-sh/nvm)
+- Yarn
+- Git
+
+## Installation
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/celo-org/celo-composer
 ```
 
-## Intro Video
+2. Set the correct node version (several Celo packages require using node version 12.x):
 
-[![Intro Video](https://img.youtube.com/vi/MQg2sta0lr8/0.jpg)](https://youtu.be/MQg2sta0lr8)
-
-## Using the Dapp Starter
-
-### Set the correct node version (several Celo packages require using node version 12.x):
-
-```shell
-cd celo-progressive-dapp-starter
+```sh
+cd celo-composer
 nvm use # uses node v12 as specified in .nvmrc
 ```
 
-### Get testnet funds and install dependencies
+3. Get testnet funds and install dependencies.
 
-```shell
+```sh
 cd packages/hardhat
 yarn install
 npx hardhat create-account # prints a private key + account
 ```
 
-Paste the private key in `packages/hardhat/.env` and fund the account from the faucet [here](https://celo.org/developers/faucet). Once the account is funded, deploy the contracts with:
+4. Paste the private key in `packages/hardhat/.env` and fund the account from the faucet [here](https://celo.org/developers/faucet). Once the account is funded, deploy the contracts with:
 
-```shell
+```sh
 yarn deploy
 ```
 
-Read more details about [the hardhat package here](packages/hardhat/README.md).
+5. In another terminal, start the frontend (React app using [Next.js](https://nextjs.org/))
 
-### In another terminal, start the frontend (React app using [Next.js](https://nextjs.org/))
+Read more details about the hardhat package [here](https://github.com/celo-org/celo-composer/blob/main/packages/hardhat/README.md).
 
-```shell
+```sh
 cd packages/react-app
 yarn install
 yarn dev
 ```
 
-### Testing on Mobile
+6. Testing on Mobile
 
 - Get the Alfajores Testnet mobile wallet for Android and iOS [here](https://celo.org/developers/wallet).
 - Serve your React app to your mobile device for testing via a tunnel.
+  Next.js defaults to serving your app on port 3000, so point the tunnel there:
 
-Next.js defaults to serving your app on port 3000, so point the tunnel there:
-
-```shell
+```sh
 npx localtunnel --port 3000
 ```
 
-Read more about localtunnel [here](https://www.npmjs.com/package/localtunnel).
-
-### Review
+## Review
 
 - Edit smart contracts in `packages/hardhat/contracts`.
 - Edit deployment scripts in `packages/hardhat/deploy`.
@@ -99,9 +189,13 @@ The example UI in `packages/react-app` uses the [Next.js](https://nextjs.org/) R
 
 **Using the Graph is not a requirement for building a web3 application. It is more of a convenience for when your application is reading a lot of data from a blockchain.**
 
-I suggest only adding support for the Graph when you need it, avoid premature optimization.
+Its suggested to only adding support for the Graph when you need it, avoid premature optimization.
 
 The `/packages/subgraphs` directory includes an example subgraph for reading data from the example `Storage.sol` contract. The Graph is a blockchain data indexing service that makes it easier to read data from EVM blockchains. You can read more about how the Graph works and how to use it in the [README here](/packages/subgraphs/README.md).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
 
 ## 🔭 Learning Solidity
 
@@ -122,21 +216,34 @@ The `/packages/subgraphs` directory includes an example subgraph for reading dat
 
 Join the Celo Discord server at https://chat.celo.org. Reach out on the dedicated repo channel [here](https://discord.com/channels/600834479145353243/941003424298856448).
 
+<!-- ROADMAP -->
+
+## Roadmap
+
+See the [open issues](https://github.com/celo-org/celo-composer/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
 ## Contributing
 
-We welcome contributions to this repository!
+As a contributor, you can add your own dApp to this repository and include it as a tab for others to access. Follow the steps below and reference existing files for additional details to help you get started.
 
-If you decide to try this out and find something confusing, consider opening an pull request to make things more clear for the next developer that comes through.
-
-If you improve the user interface or create new components that you think might be useful for other developers, consider opening a PR.
+If you decide to try this out and find something confusing, consider opening an pull request to make things more clear for the next developer that comes through. If you improve the user interface or create new components that you think might be useful for other developers, consider opening a PR.
 
 We will happily compensate you for contributions. Anywhere between 5 and 50 cUSD (or more) depending on the work. This is dependent on the work that is done and is ultimately up to the discretion of the Celo Foundation developer relations team.
 
 You can view the associated bounty on Gitcoin [here](https://gitcoin.co/issue/celo-org/celo-progressive-dapp-starter/17/100028587).
 
-## How to Contribute a new dApp
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-As a contributor, you can add your own dApp to this repository and include it as a tab for others to access. Follow the steps below and reference existing files for additional details to help you get started.
+### How to Contribute a new dApp
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
 - Create a new smart contract in `packages/hardhat/contracts`.
 - Add a new deployment script within `packages/hardhat/deploy/00-deploy.js` using the name of your smart contract.
@@ -160,6 +267,27 @@ As a contributor, you can add your own dApp to this repository and include it as
 
 You should now be able to view your new dApp from [http://localhost:3000](http://localhost:3000).
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Troubleshooting
 
 For M1 Mac developers who have installed nvm using brew, the server may crash. To resolve this issue, take a look here at this [solution](https://stackoverflow.com/a/67254340)
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<!-- CONTACT -->
+
+## Contact
+
+- [@CeloDevs](https://twitter.com/CeloDevs)
+- [Discord](https://discord.com/invite/6yWMkgM)
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+- This repo is heavily inspired by [scaffold-eth](https://github.com/scaffold-eth/scaffold-eth).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
