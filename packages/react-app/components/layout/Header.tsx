@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { useCelo } from '@celo/react-celo';
-import { truncateAddress, getWindowDimensions } from "@/utils";
+import { truncateAddress} from "@/utils";
 import {HiMenuAlt4 } from 'react-icons/hi'
 import {AiOutlineClose} from 'react-icons/ai'
 import logo from "@/public/superday.png"

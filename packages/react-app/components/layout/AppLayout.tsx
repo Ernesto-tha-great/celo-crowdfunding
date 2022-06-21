@@ -1,6 +1,5 @@
 import * as React from "react";
 import Meta from "../meta/Meta";
-import Footer from "./Footer";
 import { Header } from "./Header";
 
 interface Props {
