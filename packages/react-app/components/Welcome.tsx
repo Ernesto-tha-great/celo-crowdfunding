@@ -163,7 +163,7 @@ const Welcome = ({ contractData }) => {
                 handleChange={handleChange}
               />
               <Input
-                placeholder="Image Link"
+                placeholder="Image Link from Unsplash"
                 name="img"
                 type="text"
                 handleChange={handleChange}
